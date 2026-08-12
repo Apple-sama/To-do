@@ -7,13 +7,18 @@ int gcount = 0;
 int lcount = 3;
 
 void printlist(char** list) {
-  printf("The appended tasks are...\n");
-  for (int i = 0; i < gcount; i++) {
-    printf("%d. %s", i+1, list[i]);
+
+  if (gcount==0) {
+    printf("Don't have any task in here! Add them using \'a\' :) \n");
+  } else {
+    printf("The appended tasks are...\n");
+    for (int i = 0; i < gcount; i++) {
+      printf("%d. %s", i+1, list[i]);
+    }
   }
 }
 
-char** fn(char** list) {
+char** addfn(char** list) {
   char* input = NULL;
   size_t size = 0;
 
@@ -54,7 +59,7 @@ int main() {
   while(1) {
     printf("\nchoose the command u wanna use...\nAdd (a) || Print the list (p) || quit (ctrl+d)\n>>");
     if (getline(&cmd, &size, stdin) == -1){break;};
-    if (!strcmp(cmd, "a\n")) {list = fn(list);}
+    if (!strcmp(cmd, "a\n")) {list = addfn(list);}
     if (!strcmp(cmd, "p\n")) {printlist(list);}
   }
 
