@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "main.h"
 
 int gcount = 0;
@@ -28,8 +25,8 @@ char** addfn(char** list) {
 
   list = dynamic_append(input, list);
   
-  return list;
   free(input);
+  return list;
 }
 char** dynamic_append(char *args, char **list) {
 
@@ -45,9 +42,7 @@ char** dynamic_append(char *args, char **list) {
     perror("realloc");
     exit(1);
   }
-
   return temp;
-
 }
 
 int main() {
@@ -55,7 +50,10 @@ int main() {
 
   char *cmd= NULL;
   size_t size = 0;
- 
+  
+  // reading from file for tasks.
+  list = readfile("files/file.txt", &lcount, list);
+
   while(1) {
     printf("\nchoose the command u wanna use...\nAdd (a) || Print the list (p) || quit (ctrl+d)\n>>");
     if (getline(&cmd, &size, stdin) == -1){break;};
