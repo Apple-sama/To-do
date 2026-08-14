@@ -10,5 +10,6 @@ void printlist(char** list);
 char** addfn(char ** list);
 
 char** readfile(char* filename, int *listlen, char** list);
+int writefile(char* filename, int *listlen, char** file);
 
 #endif // !MAIN_H

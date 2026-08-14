@@ -1,7 +1,8 @@
 #include "main.h"
+#include <stdio.h>
 
-char** readfile(char* filename, int *listlen, char** list) {
-  FILE *fptr = fopen(filename, "r");
+char** readfile(char* filepath, int *listlen, char** list) {
+  FILE *fptr = fopen(filepath, "r");
 
   if (fptr == NULL) {
     // return -1;
@@ -20,4 +21,22 @@ char** readfile(char* filename, int *listlen, char** list) {
 
   *listlen = count;
   return list;
+}
+
+int writefile(char* filepath, int *listlen, char** file) {
+
+  FILE *fptr = fopen(filepath, "w");
+  
+  if (fptr == NULL) {
+    printf("wasn't able to write");
+    return 0;
+  }
+
+  for (int i = 0; i < *listlen; i++) {
+    fputs(file[i], fptr);
+  }
+  
+  fclose(fptr);
+  printf("wrote the content!");
+  return 1;
 }

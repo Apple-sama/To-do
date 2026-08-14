@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 
 int gcount = 0;
 int lcount = 3;
@@ -51,8 +52,11 @@ int main() {
   char *cmd= NULL;
   size_t size = 0;
   
+  char *filepath = "file.txt";
+  FILE *fptr = fopen(filepath, "a");
+
   // reading from file for tasks.
-  list = readfile("files/file.txt", &lcount, list);
+  list = readfile(filepath, &lcount, list);
 
   while(1) {
     printf("\nchoose the command u wanna use...\nAdd (a) || Print the list (p) || quit (ctrl+d)\n>>");
@@ -61,6 +65,8 @@ int main() {
     if (!strcmp(cmd, "p\n")) {printlist(list);}
   }
 
+  // dumping the data in file
+  writefile(filepath, &lcount, list);
   printf("\nThx for using!!\n");
 
   for (int i = 0; i < gcount; i++) {
