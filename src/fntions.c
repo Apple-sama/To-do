@@ -1,5 +1,6 @@
 #include "main.h"
 #include <stdio.h>
+#include <string.h>
 
 char** readfile(char* filepath, int *listlen, char** list) {
   FILE *fptr = fopen(filepath, "r");
@@ -39,4 +40,23 @@ int writefile(char* filepath, int *listlen, char** file) {
   fclose(fptr);
   printf("wrote the content!");
   return 1;
+}
+
+void pop(char** list, int *listlen) {
+  int dnum;
+  char** tmp;
+  char* tmpvar;
+  scanf("%d", &dnum);
+
+  for(int i=0; i<*listlen; i++) {
+    if (i!=dnum) {
+      tmp = dynamic_append(list[i], tmp);
+    } else {
+      tmpvar = list[i];
+    }
+  }
+
+  printf("%d", *listlen);
+
+  return;
 }

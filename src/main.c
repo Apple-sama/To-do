@@ -26,6 +26,7 @@ char** addfn(char** list) {
 
   list = dynamic_append(input, list);
   
+  printf("got here");
   free(input);
   return list;
 }
@@ -47,6 +48,8 @@ char** dynamic_append(char *args, char **list) {
 }
 
 int main() {
+  printf("before : %d", lcount);
+  printf("before : %d", gcount);
   char** list = calloc(lcount, sizeof(*list));
 
   char *cmd= NULL;
@@ -56,17 +59,21 @@ int main() {
   FILE *fptr = fopen(filepath, "a");
 
   // reading from file for tasks.
-  list = readfile(filepath, &lcount, list);
+  list = readfile(filepath, &gcount, list);
+  printf("after : %d", lcount);
+  printf("after : %d", gcount);
 
   while(1) {
     printf("\nchoose the command u wanna use...\nAdd (a) || Print the list (p) || quit (ctrl+d)\n>>");
-    if (getline(&cmd, &size, stdin) == -1){break;};
+    if (getline(&cmd, &size, stdin) == -1){break;}
+    if (!strcmp(cmd, "q\n")) {break;}
     if (!strcmp(cmd, "a\n")) {list = addfn(list);}
     if (!strcmp(cmd, "p\n")) {printlist(list);}
+    if (!strcmp(cmd, "d\n")) {pop(list, &lcount);}
   }
 
   // dumping the data in file
-  writefile(filepath, &lcount, list);
+  writefile(filepath, &gcount, list);
   printf("\nThx for using!!\n");
 
   for (int i = 0; i < gcount; i++) {

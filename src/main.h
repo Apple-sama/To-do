@@ -11,5 +11,6 @@ char** addfn(char ** list);
 
 char** readfile(char* filename, int *listlen, char** list);
 int writefile(char* filename, int *listlen, char** file);
+void pop(char** list, int *listlen);
 
 #endif // !MAIN_H
