@@ -69,7 +69,7 @@ int main() {
     if (!strcmp(cmd, "q\n")) {break;}
     if (!strcmp(cmd, "a\n")) {list = addfn(list);}
     if (!strcmp(cmd, "p\n")) {printlist(list);}
-    if (!strcmp(cmd, "d\n")) {pop(list, &lcount);}
+    if (!strcmp(cmd, "d\n")) {pop(&list, &gcount, &lcount);}
   }
 
   // dumping the data in file

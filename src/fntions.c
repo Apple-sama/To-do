@@ -1,6 +1,5 @@
 #include "main.h"
 #include <stdio.h>
-#include <string.h>
 
 char** readfile(char* filepath, int *listlen, char** list) {
   FILE *fptr = fopen(filepath, "r");
@@ -42,21 +41,28 @@ int writefile(char* filepath, int *listlen, char** file) {
   return 1;
 }
 
-void pop(char** list, int *listlen) {
+void pop(char*** list, int *listlen, int *list_len) {
   int dnum;
-  char** tmp;
-  char* tmpvar;
-  scanf("%d", &dnum);
 
-  for(int i=0; i<*listlen; i++) {
-    if (i!=dnum) {
-      tmp = dynamic_append(list[i], tmp);
-    } else {
-      tmpvar = list[i];
+  printf("No of Task u wanna delete $ ");
+  if (scanf("%d", &dnum) != 1 || dnum < 0 || dnum >= *listlen) {
+    printf("Invalid index!\n");
+    return;
     }
+  dnum--;
+  free((*list)[dnum]);
+
+  for (int i=dnum; i<*listlen-1; i++) {
+    (*list)[i] = (*list)[i+1];
   }
 
-  printf("%d", *listlen);
+  (*listlen)--;
 
-  return;
+  if (*listlen > 0) {
+    char **tmp = realloc(*list, (*list_len) * sizeof(char*));
+    if (tmp != NULL) {
+      *list = tmp;
+    }
+    return;
+  }
 }
