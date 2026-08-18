@@ -1,5 +1,6 @@
 #include "main.h"
 #include <stdio.h>
+#include <string.h>
 
 char** readfile(char* filepath, int *listlen, char** list) {
   FILE *fptr = fopen(filepath, "r");
@@ -37,7 +38,7 @@ int writefile(char* filepath, int *listlen, char** file) {
   }
   
   fclose(fptr);
-  printf("wrote the content!");
+  printf("\nwrote the content!");
   return 1;
 }
 
@@ -45,12 +46,12 @@ void pop(char*** list, int *listlen, int *list_len) {
   int dnum;
 
   printf("No of Task u wanna delete $ ");
-  if (scanf("%d", &dnum) != 1 || dnum < 0 || dnum >= *listlen) {
+  if (scanf("%d", &dnum) != 1 || --dnum < 0 || dnum >= *listlen) {
     printf("Invalid index!\n");
     return;
     }
-  dnum--;
-  free((*list)[dnum]);
+  
+  char* ptask = (*list)[dnum];
 
   for (int i=dnum; i<*listlen-1; i++) {
     (*list)[i] = (*list)[i+1];
@@ -63,6 +64,9 @@ void pop(char*** list, int *listlen, int *list_len) {
     if (tmp != NULL) {
       *list = tmp;
     }
-    return;
   }
+  ptask[strlen(ptask)-1] = 0;
+  printf("deleted the Task [%s]\n", ptask);
+  free(ptask);
+
 }
